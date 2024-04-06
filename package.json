@@ -1,0 +1,8 @@
+{
+  "scripts": {
+    "start": "npm exec http-server -o ./src/ -a localhost -p 8080"
+  },
+  "dependencies": {
+    "http-server": "^14.1.1"
+  }
+}
