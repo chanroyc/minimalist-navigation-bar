@@ -36,8 +36,21 @@ class Navigation {
       })
 
       button.innerHTML = label;
-      button.addEventListener('click', onClickHandler);
+      button.addEventListener('click', (event) => onClickHandler(event, data));
     })
+  }
+}
+
+class Clock {
+  create = () => {
+    let clock = document.createElement('div');
+
+    setAttributes(clock, {
+      'id' : 'clock',
+      'class': 'clock',
+    });
+
+    document.body.append(clock);
   }
 }
 
@@ -64,7 +77,7 @@ const setAttributes = (el, attrs) => {
   }
 }
 
-const onClickHandler = (event) => {
+const onClickHandler = (event, data) => {
   event.preventDefault();
 
   // Get the active element
@@ -73,6 +86,8 @@ const onClickHandler = (event) => {
 
   activeEl.setAttribute('aria-selected', false);
   newActiveEl.setAttribute('aria-selected', true);
+
+  setTime(data);
 
   requestAnimationFrame(animation);
 }
@@ -85,11 +100,24 @@ const animation = () => {
   navList.style.setProperty('--button-width', `${activeEl.offsetWidth}px`);
 }
 
+const setTime = async (data) => {
+  let activeEl = document.querySelector('[aria-selected="true"]');
+  let city = data.find((city) => (city.section === activeEl.dataset.section));
+
+  let currentTime = new Date().toLocaleString([], {timeZone: city.tz});
+  let clock = document.getElementById('clock');
+
+  clock.innerHTML = currentTime;
+}
+
 const init = async () => {
   let nav = new Navigation();
+  let clock = new Clock();
+
   let data = await getData();
 
   nav.create();
+  clock.create();
   nav.createElements(data?.cities)
   
   requestAnimationFrame(animation);
@@ -97,6 +125,12 @@ const init = async () => {
   window.addEventListener('resize', () => {
     requestAnimationFrame(animation);
   });
+
+  setTime(data?.cities);
+
+  setInterval(() => {
+    setTime(data?.cities);
+  }, 1000)
 }
 
 init();

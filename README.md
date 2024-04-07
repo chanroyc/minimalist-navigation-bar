@@ -8,7 +8,8 @@ This is a minimalistic navigation bar that is generated using data from a JSON f
 
 - On resize, the sliding indicator bar updates its position and size to match the text
 - Code is optimized for Safari, support for other browsers are included (Chrome & Firefox)
-- No library usage, only ES6 and CSS.
+- No library usage, only ES6 and CSS
+- Displays time of the current city
 
 ## Considerations
 
@@ -19,6 +20,9 @@ By using `aria-selected`, we don't have add/remove classes on buttons, we can us
 Animations are done using `transforms` rather than absolutely positioned elements as the DOM will NOT be re-drawn.
 
 The hover media query allows us to detect the user's primary input mechanism can hover over elements. It can have two values: none detects when the primary input mechanism can't hover or can't conveniently hover, like most cellphones and tablets.
+
+For the purpose of this exercise only, I have decided to pull timezones codes from navigation.json. It might be a good idea to fetch timezone codes using Google Maps API for exmaple, where you could search for a specific city (eg. https://maps.googleapis.com/maps/api/geocode/json?&address=location and get timezone given lat,long)
+
 
 ## How to Run
 
