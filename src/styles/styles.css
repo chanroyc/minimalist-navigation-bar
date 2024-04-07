@@ -50,10 +50,6 @@ nav ul:after {
   transition: all 0.2s ease-in-out;
 }
 
-nav li {
-
-}
-
 nav li button {
   cursor: pointer;
   border: none;
