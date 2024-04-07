@@ -68,6 +68,14 @@ nav li button {
   }
 }
 
+.clock {
+  text-align: center;
+  font-family: "SF Pro", sans-serif;
+  font-size: 48px;
+  margin: 60px 0;
+  color: var(--color-black);
+}
+
 @media (hover: hover) {
   nav li button:hover {
     &[aria-selected="false"] {
